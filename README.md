@@ -1,2 +1,6 @@
 # ACTest
-Auto Create Java Test
+Auto Create Java Test 
+
+本项目立志于摆脱单元测试，帮助开发者生成单元测试。
+现已可以针对简单的方法生成单元测试（不够智能）
+- 待代码完善后，我会将代码打包成idea的插件供大家免费使用
