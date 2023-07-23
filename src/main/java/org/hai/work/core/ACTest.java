@@ -1,5 +1,6 @@
 package org.hai.work.core;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hai.work.domain.BaseApiDO;
 import org.hai.work.domain.util.CommonUtil;
@@ -7,14 +8,14 @@ import org.hai.work.domain.util.CommonUtil;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import static org.hai.work.domain.constant.Constant.*;
 
+/**
+ * @author 神明
+ */
 public class ACTest {
 
     public static void main(String[] args) throws Exception {
@@ -103,8 +104,9 @@ public class ACTest {
                 }
                 realMethodParamMap.put(methodName, realParamList);
 
+
                 // 有返回值
-                if (!returnType.getSimpleName().equals("void")) {
+                if (ObjectUtils.notEqual("void", returnType.getSimpleName())) {
                     // 入参构建完毕，开始构建要执行的测试方法，并把参数塞进去
                     String[] classNameStr = StringUtils.splitByWholeSeparator(clazz.getName(), ".");
                     String className = classNameStr[classNameStr.length - 1];
@@ -159,8 +161,7 @@ public class ACTest {
             else {
                 // 无入参数的话，一般是为了创建一个对象，或是通过DO注入对象（充血模型）进行处理
                 // 1.创建一个对象，有返回值
-                if (!returnType.getSimpleName().equals("void")) {
-
+                if (ObjectUtils.notEqual("void", returnType.getSimpleName())) {
                     // 入参构建完毕，开始构建要执行的测试方法，并把参数塞进去
                     String[] classNameStr = StringUtils.splitByWholeSeparator(clazz.getName(), ".");
                     String className = classNameStr[classNameStr.length - 1];

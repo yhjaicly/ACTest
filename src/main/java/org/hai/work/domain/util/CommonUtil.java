@@ -110,7 +110,7 @@ public class CommonUtil {
         // 添加类的头
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("package org.hai.work.domain;\nimport org.testng.annotations.Test;\nimport org.testng.Assert;\n").append("public class ").append(clazz.getSimpleName()).append("Test {\n\n");
-        stringBuffer.append(testStr).append("\n}");
+        stringBuffer.append(testStr).append(createObj(clazz)).append("\n}");
         bufferedWriter.write(stringBuffer.toString());
         bufferedWriter.flush();
         bufferedWriter.close();
@@ -157,4 +157,13 @@ public class CommonUtil {
         String text = method.getBody().get().toString();
         return text.contains("throw");
     }
+
+    public static String createObj(Class<?> clazzName){
+        StringBuffer sb = new StringBuffer();
+        sb.append("\tprivate ").append(getClazzName(clazzName)).append(" ")
+                .append(StringUtils.uncapitalize(getClazzName(clazzName))).append(" {")
+                .append("\n\t\treturn new ").append(StringUtils.uncapitalize(getClazzName(clazzName))).append("();").append("\n\t}");
+        return sb.toString();
+    }
+
 }
